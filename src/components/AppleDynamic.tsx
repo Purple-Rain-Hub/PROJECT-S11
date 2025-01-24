@@ -1,27 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
+// import { Response } from "../types/Response";
+import { getSongs } from "../redux/action";
+import { useDispatch, useSelector } from "react-redux";
 import { Response } from "../types/Response";
 
+interface State {
+  song: Response[] | [];
+}
+
 const AppleDynamic = () => {
-  const [songs, setSongs] = useState<Response[] | []>([]);
-  const getSongs = async () => {
-    try {
-      const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/deezer/search?q=queen"
-      );
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        setSongs(data.data);
-      }
-    } catch (error) {
-      console.error("ERRORE", error);
-    }
-  };
+  const dispatch = useDispatch();
+  const songs = useSelector((state: State) => state.song);
 
   useEffect(() => {
-    getSongs();
-  }, []);
+    dispatch(getSongs());
+  });
 
   return (
     <Container fluid className="p-4 bg-apple p-lg-3">
@@ -30,7 +24,7 @@ const AppleDynamic = () => {
           Nuove uscite
         </h2>
         <Row className="pe-lg-4">
-          {songs.map((s, i) => {
+          {songs.map((s: Response, i: number) => {
             return (
               i < 12 && (
                 <Col xs={4} lg={2} className="p-2">
