@@ -3,8 +3,8 @@ import { Button, Col, Row } from "react-bootstrap";
 
 const AppleDesktopPlayer = () => {
   const [volume, setVolume] = useState<number>(50);
-  const handleVolumeChange = (e) => {
-    setVolume(e.target.value);
+  const handleVolumeChange = (e: string) => {
+    setVolume(parseInt(e));
   };
 
   return (
@@ -37,7 +37,7 @@ const AppleDesktopPlayer = () => {
           max="100"
           className="slider"
           value={volume}
-          onChange={(e) => handleVolumeChange(e)}
+          onChange={(e) => handleVolumeChange(e.target.value)}
         ></input>
       </Col>
       <Col xs={1} className="text-center">
