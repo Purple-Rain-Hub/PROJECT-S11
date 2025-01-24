@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
-import { Response } from "../types/response";
+import { Response } from "../types/Response";
 
 const AppleDynamic = () => {
   const [songs, setSongs] = useState<Response[] | []>([]);
